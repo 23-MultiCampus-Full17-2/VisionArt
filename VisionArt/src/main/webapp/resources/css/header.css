@@ -1,0 +1,92 @@
+/* header.css */
+
+@charset "UTF-8";
+
+#header {
+  max-width: 1500px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#logo {
+	 margin-left: 1%;
+  margin-right: 5%;
+ 
+}
+.weather{
+	margin-right: 5%;
+	
+}
+#searchForm {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+  margin-right: 5%;
+}
+
+#searchQuery {
+  color: blue;
+  margin-left: 10px;
+  font-size: 20px;
+  max-width: 400px;
+  font-family: 'Pretendard';
+   margin-right: 5px;
+   border-radius: 8px; 
+}
+
+#searchForm Button {
+  width: 110px;
+  height: 30px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 8px;
+  box-shadow: 1px 3px 5px darkgrey;
+  background-color: #fafafa;
+}
+.chat{
+	margin-right: 5%;
+}
+.user_button {
+ 
+  margin-right: 5%;
+}
+
+.headerBtn {
+  display: flex;
+  width: 110px;
+  height: 30px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 8px;
+  box-shadow: 1px 3px 5px darkgrey;
+  background-color: #fafafa;
+  margin-right: 5px;
+flex-shrink: 0;
+justify-content: center; /* 가로 방향 가운데 정렬 */
+  align-items: center; 
+}
+
+#loginBtn {
+  text-decoration: none;
+  color: #0077c0;
+}
+#registerBtn{
+	 text-decoration: none;
+  color: #0077c0;
+}
+
+
+#logo:hover,
+.weather:hover,
+#searchForm button:hover,
+.chat:hover,
+.user_button:hover,
+.headerBtn:hover
+ {
+  cursor: pointer;
+  -webkit-transform: scale(1.3);
+    transform: scale(1.2);
+}

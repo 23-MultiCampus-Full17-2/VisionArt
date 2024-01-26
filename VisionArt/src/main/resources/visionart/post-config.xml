@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+ "mybatis-3-config.dtd">
+  
+<configuration>
+ <settings>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+
+	<typeAliases>
+		<typeAlias type="dto.PostDTO" alias="postdto"/>
+		<typeAlias type="dto.CommentDTO" alias="commentdto"/>
+		<typeAlias type="dto.ImageDTO" alias="imagedto"/>
+		<typeAlias type="dto.LikeDTO" alias="likedto"/>
+		<typeAlias type="dto.HomeDTO" alias="homedto"/>
+		<typeAlias type="dto.MemberDTO" alias="memberdto"/>
+		<typeAlias type="dto.InformDTO" alias="informdto"/>
+	</typeAliases>
+	
+
+    
+</configuration>
+
