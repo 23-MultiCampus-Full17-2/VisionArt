@@ -4,9 +4,9 @@
 <c:set var="path" value="${pageContext.request.contextPath}" />
 
 <!-- CSS 연결 -->
-<link rel="stylesheet" href="${path}/resources/css/footer.css">
+<link rel="stylesheet" href="${path}/css/footer.css">
 <!-- JavaScript 연결 -->
-<script type="text/javascript" src="${path}/resources/js/footer.js"></script>
+<script type="text/javascript" src="${path}/js/footer.js"></script>
 <footer>
 	<div class="divideline"></div>
 	<div class="footer_contents">

@@ -8,9 +8,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VisionArt</title>
      <c:set var="path" value="${pageContext.request.contextPath}" />  
-    <script src="${path}/resources/js/UpdatePost.js"></script>
-    <script src="${path}/resources/js/jquery-3.7.1.min.js"></script>
-    <link href="${path}/resources/css/updatepost.css" rel="stylesheet">
+    <script src="${path}/js/UpdatePost.js"></script>
+    <script src="${path}/js/jquery-3.7.1.min.js"></script>
+    <link href="${path}/css/updatepost.css" rel="stylesheet">
 </head>
 <body>
 <%@ include file="header.jsp" %>

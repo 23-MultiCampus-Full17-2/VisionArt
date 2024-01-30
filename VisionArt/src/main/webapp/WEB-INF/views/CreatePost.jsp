@@ -10,16 +10,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>VisionArt</title>
-<script src="${path}/resources/js/CreatePost.js"></script>
-<script src="${path}/resources/js/jquery-3.7.1.min.js"></script>
-<link href="${path}/resources/css/createpost.css" rel="stylesheet" type="text/css">
+<script src="${path}/js/CreatePost.js"></script>
+<script src="${path}/js/jquery-3.7.1.min.js"></script>
+<link href="${path}/css/createpost.css" rel="stylesheet" type="text/css">
 
 </head>
 <body>
 <%@ include file="header.jsp" %>
-	<br>
-	<br>
-	<br>
+	<br><br><br>
 	<section id="container">
 		<div class="post">
 			<form id="postForm" action="/post/write" method="post"
@@ -53,8 +51,7 @@
 					 <div class="box">
 					<input type="file" name="imageFiles" accept="image/*" value="파일첨부" multiple>
 					<input type="file" name="imageFiles" accept="image/*" value="파일첨부" multiple>
-						<!-- <input type="file" id="postImage" name="imageFile"
-							accept="image/*" value="파일첨부" multiple> -->
+		
 
 					</div>
 				<br> <br>
@@ -65,40 +62,7 @@
 			</form>
 		</div>
 	</section>
-	 <script>
-    function setArtFieldId() {
-        var selectedArtField = document.getElementById("selectedArtField").value;
-        console.log("Selected Art Field: " + selectedArtField);
-        var artFieldIdInput = document.getElementById("artFieldId");
-        
-        // 선택된 드롭다운 값에 따라 hidden 필드의 값을 설정합니다.111
-        switch (selectedArtField) {
-            
-            case "유머글":
-                artFieldIdInput.value = 10;
-                break;
-            case "자랑하기":
-                artFieldIdInput.value = 11;
-                break;
-            case "질문하기":
-                artFieldIdInput.value = 12;
-                break;
-            case "정보공유":
-                artFieldIdInput.value = 13;
-                break;
-            case "그냥":
-                artFieldIdInput.value = 14;
-                break; 
-            case "카테고리선택하기":
-                artFieldIdInput.value = 15;
-                break; 
-            // 다른 옵션에 대한 경우 추가
-            default:
-                artFieldIdInput.value = 14; // 기본값 설정
-        }
-        console.log("Art Field ID: " + artFieldIdInput.value);
-    }
-</script>
+
 
 <%@ include file="footer.jsp" %>
 </body>

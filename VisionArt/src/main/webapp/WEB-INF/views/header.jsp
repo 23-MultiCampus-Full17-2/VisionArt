@@ -3,18 +3,18 @@
 <c:set var="path" value="${pageContext.request.contextPath}" />
 
 <div id="header">
-    <img id="logo" src="${path}/resources/visionart/logo.png" onclick="location.href = '/'">
+    <img id="logo" src="${path}/icon/logo.png" onclick="location.href = '/'">
 
     <!-- CSS 연결 -->
-	 <link rel="stylesheet" href="${path}/resources/css/menu.css">  
-	<link rel="stylesheet" href="${path}/resources/css/header.css">
+	 <link rel="stylesheet" href="${path}/css/menu.css">  
+	<link rel="stylesheet" href="${path}/css/header.css">
 	
     <!-- JavaScript 연결 -->
-    <script type="text/javascript" src="${path}/resources/js/header.js"></script>
+    <script type="text/javascript" src="${path}/js/header.js"></script>
 
 <div class="weather">
  <a href="/weather">
-	<img src="${path}/resources/visionart/weather.png" width="65" height="70" alt="weather">
+	<img src="${path}/icon/weather.png" width="65" height="70" alt="weather">
 		</a>
 			</div>
 
@@ -25,13 +25,13 @@
     </form>
 <div class="chat">
 
-	<img src="${path}/resources/visionart/chat.png" width="60" height="60" alt="chat" 
+	<img src="${path}/icon/chat.png" width="60" height="60" alt="chat" 
 	id="chatBtn" onclick="handleChatBtn()">
 
 			</div>
 	<div class="user_button">
 		<a href="/mypage" id="UserBtn">
-<img src="${path}/resources/visionart/user.png" width="50" height="50" alt="mypage"
+<img src="${path}/icon/user.png" width="50" height="50" alt="mypage"
  onclick="handleUserBtn()">
 	</a>
 

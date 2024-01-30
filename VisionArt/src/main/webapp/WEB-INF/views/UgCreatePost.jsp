@@ -9,9 +9,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>VisionArt</title>
 <c:set var="path" value="${pageContext.request.contextPath}" />
-<script src="${path}/resources/js/UgCreatePost.js"></script>
-<script src="${path}/resources/js/jquery-3.7.1.min.js"></script>
-<link href="${path}/resources/css/ugcreatepost.css" rel="stylesheet" type="text/css">
+<script src="${path}/js/UgCreatePost.js"></script>
+<script src="${path}/sjs/jquery-3.7.1.min.js"></script>
+<link href="${path}/css/ugcreatepost.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <%@ include file="header.jsp" %>

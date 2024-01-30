@@ -3,21 +3,28 @@
  "mybatis-3-config.dtd">
   
 <configuration>
- <settings>
-        <setting name="mapUnderscoreToCamelCase" value="true"/>
-    </settings>
 
 	<typeAliases>
-		<typeAlias type="dto.PostDTO" alias="postdto"/>
-		<typeAlias type="dto.CommentDTO" alias="commentdto"/>
-		<typeAlias type="dto.ImageDTO" alias="imagedto"/>
-		<typeAlias type="dto.LikeDTO" alias="likedto"/>
-		<typeAlias type="dto.HomeDTO" alias="homedto"/>
-		<typeAlias type="dto.MemberDTO" alias="memberdto"/>
-		<typeAlias type="dto.InformDTO" alias="informdto"/>
+		<typeAlias type="com.mc.full17th2.dto.PostDTO" alias="postdto"/>
+		<typeAlias type="com.mc.full17th2.dto.PostDTO2" alias="postdto2"/>
+		<typeAlias type="com.mc.full17th2.dto.UgPostDTO2" alias="ugpostdto2"/>
+		<typeAlias type="com.mc.full17th2.dto.UgPostDTO" alias="ugpostdto"/>
+		<typeAlias type="com.mc.full17th2.dto.CommentDTO" alias="commentdto"/>
+		<typeAlias type="com.mc.full17th2.dto.UgCommentDTO" alias="ugcommentdto"/>
+		<typeAlias type="com.mc.full17th2.dto.ImageDTO" alias="imagedto"/>
+		<typeAlias type="com.mc.full17th2.dto.UgImageDTO" alias="ugimagedto"/>
+		<typeAlias type="com.mc.full17th2.dto.LikeDTO" alias="likedto"/>
+		<typeAlias type="com.mc.full17th2.dto.UgLikeDTO" alias="uglikedto"/>
+		<typeAlias type="com.mc.full17th2.dto.HomeDTO" alias="homedto"/>
+		<typeAlias type="com.mc.full17th2.dto.MemberDTO" alias="memberdto"/>
+		<typeAlias type="com.mc.full17th2.dto.UgMemberDTO" alias="ugmemberdto"/>
+		<typeAlias type="com.mc.full17th2.dto.InformDTO" alias="informdto"/>
+		<typeAlias type="com.mc.full17th2.dto.ArtFieldDTO" alias="artfielddto"/>
+		<typeAlias type="com.mc.full17th2.dto.UgArtFieldDTO" alias="ugartfielddto"/>
 	</typeAliases>
 	
 
-    
+  
+ 
 </configuration>
 

@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>VisionArt</title>
-<link rel="stylesheet" href="${path}/resources/css/ReadPostAll.css">
+<link rel="stylesheet" href="${path}/css/ReadPostAll.css">
 </head>
 <body>
 <%@ include file="header.jsp" %>	
@@ -36,9 +36,21 @@
 			</div>
 			
 			<h2 class="post-title" data-post-id="${post.post_id}">${post.title}</h2>
+			<br>
+			<div class="post-content-box"> 
+					
+					 <c:forEach var="post_attachment" items="${images}">
+						<c:if test="${post_attachment.post_id == post.post_id}">
+							<c:set var="post_att_path" value="${post_attachment.post_att_path}" />
+						</c:if>
+					</c:forEach>
+					<img src="/visionart/${post_att_path}" class="post-img" data-post-id="${post.post_id}"> 
+					&nbsp;&nbsp;
+					<h4 class="post-content" data-post-id="${post.post_id}">${post.content}</h4>
+						</div>
 			
 				<div class="profile">
-						<img src="${path}/resources/visionart/user.png" class="profile-img">
+						<img src="${path}/icon/user.png" class="profile-img">
 						<p class="profile-name">
 							<c:forEach var="member" items="${all.members}">
 								<c:if test="${post.member_id eq member.member_id}">
@@ -48,16 +60,6 @@
 						</p>
 
 					</div>
-					<div class="post-content-box"> 
-					<h4 class="post-content" data-post-id="${post.post_id}">${post.content}</h4>
-					</div>
-					<%-- <c:forEach var="post_attachment" items="${images}">
-						<c:if test="${post_attachment.post_id == post.post_id}">
-							<c:set var="post_att_path" value="${post_attachment.post_att_path}" />
-						</c:if>
-					</c:forEach>
-					<img src="/visionart/${post_att_path}" class="post-img" data-post-id="${post.post_id}"> --%>
-					
 					
 				<div class="viewCount" data-post-id="${post.post_id}"> <p>조회수 </p> ${post.views}</div>
 				
@@ -65,11 +67,11 @@
 	<!--좋아요 이미지 및 개수: 각 게시물에 대한 좋아요 이미지와 좋아요 개수를 표시
     좋아요 개수는 ${likeNum}에 표시되며, 이미지는 좋아요 여부에 따라 변경됨  -->
 					<div class="like">
-						<c:set var="likeImage" value="${path}/resources/visionart/heart.png" />
+						<c:set var="likeImage" value="${path}/icon/heart.png" />
 
 						<c:forEach var="personal" items="${likes}">
 							<c:if test="${post.post_id == personal.post_id}">
-								<c:set var="likeImage" value="${path}/resources/visionart/redheart.png" />
+								<c:set var="likeImage" value="${path}/icon/redheart.png" />
 							</c:if>
 						</c:forEach>
 
@@ -116,7 +118,7 @@
 			</c:if>
 		</ul>
 	</section>
-<%-- 	<script src="${path}/resources/js/ReadPostAll.js"></script> --%>
+<%-- 	<script src="${path}/static/js/ReadPostAll.js"></script> --%>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     // post_id를 클릭한 postBox에서 가져와서 새로운 URL로 이동

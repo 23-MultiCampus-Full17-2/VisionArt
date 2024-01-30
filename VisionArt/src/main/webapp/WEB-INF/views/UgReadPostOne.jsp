@@ -1,4 +1,4 @@
-<%@page import="dto.UgReadPostOneDTO"%>
+<%@page import="com.mc.full17th2.dto.UgReadPostOneDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -9,9 +9,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>VisionArt</title>
-<link href="${path}/resources/css/UgReadPostOne.css" rel="stylesheet">
-<script src="${path}/resources/js/jquery-3.7.1.min.js"></script>
-<script src="${path}/resources/js/UgReadPostOne.js"></script>
+<link href="${path}/css/UgReadPostOne.css" rel="stylesheet">
+<script src="${path}/js/jquery-3.7.1.min.js"></script>
+<script src="${path}/js/UgReadPostOne.js"></script>
 </head>
 <script>
 	let sessionId = <%=session.getAttribute("memberid")%>;
@@ -172,9 +172,11 @@
 					dataType: "json",
 					success: function(response){
 						location.reload();
+						console.log("Comment deleted successfully");
 					},
 					error: function(request, e){
 						alert("코드: " + request.status + "메시지: " + request.responseText + "오류: " + e);
+						console.error("Error deleting comment", error);
 					}
 				});
 			};
@@ -213,8 +215,10 @@
 						success: function(response){
 							alert("게시물 삭제성공");
 							location.href = "/ug";
+							console.log("Post deleted successfully");
 						},
 						error: function(request, e){
+							console.error("Error deleting post", error);
 							alert("코드: " + request.status + "메시지: " + request.responseText + "오류: " + e);
 						}
 					});
@@ -245,7 +249,7 @@
 			<div class="sideBar">
 				<button class="sideBarBtn">
 					<img class="sideBarImg"
-						src="${path}/resources/visionart/more1.png" width="35"
+						src="${path}/icon/more1.png" width="35"
 						height="35"></img>
 				</button>
 				<div class="option">
@@ -270,12 +274,12 @@
 		</div>
 		<div id="btns">
 			<button id="likeBtn" type="button">
-				<span> <img src="${path}/resources/visionart/likeheart.png">
+				<span> <img src="${path}/icon/likeheart.png">
 					<p id="likeBtnText" style="display: inline;">0</p>
 				</span>
 			</button>
 			<button id="share" type="button">
-				<img src="${path}/resources/visionart/share.png">
+				<img src="${path}/icon/share.png">
 			</button>
 		</div>
 

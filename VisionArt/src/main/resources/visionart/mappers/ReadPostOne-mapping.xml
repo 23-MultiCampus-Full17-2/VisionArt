@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="dao.ReadPostOneDAO">
+<mapper namespace="com.mc.full17th2.dao.ReadPostOneDAO">
 	<select id="selectPostDetail" resultType="postdto" parameterType="int">
 		select * from visionartdb.post where post_id = #{post_id}
 	</select>

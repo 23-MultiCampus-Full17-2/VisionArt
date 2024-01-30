@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="dao.UgReadPostAllDAO">
+<mapper namespace="com.mc.full17th2.dao.UgReadPostAllDAO">
 <!-- selectPosts: post 테이블에서 게시물을 조회하는 쿼리입니다. LIMIT와 OFFSET을 사용하여 페이징 처리가 이루어짐 
 #{limit} 및 #{offset}은 MyBatis의 파라미터 바인딩을 나타내며, 실행 시에 실제 값으로 대체됨 -->
-	  <select id="selectUgPostsByPostField" resultType="dto.UgPostDTO">
+	  <select id="selectUgPostsByPostField" resultType="ugpostdto">
         SELECT * FROM visionartdb.post WHERE post_field_id = 1 ORDER BY post_id DESC
         LIMIT #{pageSize} OFFSET #{offset}
     </select>
 
 	<!--selectMembers: member 테이블에서 모든 회원 정보를 조회하는 쿼리  -->
-	<select id="selectUgMembers" resultType="dto.UgMemberDTO">
+	<select id="selectUgMembers" resultType="ugmemberdto">
 		select * from visionartdb.member
 	</select>
 	<!--selectTotalPosts: post 테이블에서 전체 게시물 수를 조회하는 쿼리  -->
@@ -18,11 +18,11 @@
 		SELECT COUNT(*) AS totalPosts FROM visionartdb.post WHERE post_field_id = 1
 	</select>
 	<!-- artfieldName  -->
-	<select id="getArtFieldName" resultType="dto.UgArtFieldDTO">
+	<select id="getArtFieldName" resultType="ugartfielddto">
 	select * from visionartdb.art_field;
 	</select>
 	<!--getLikes: post_like 테이블에서 특정 회원이 좋아요를 누른 게시물을 조회하는 쿼리  -->
-	<select id="getLikes" resultType="dto.UgLikeDTO" parameterType="int">
+	<select id="getLikes" resultType="uglikedto" parameterType="int">
 		SELECT * FROM visionartdb.post_like where member_id = #{member_id}
 	</select>
 	<!-- updateLike: post_like 테이블에 좋아요 정보를 추가하는 쿼리  -->
@@ -40,22 +40,22 @@
 		DELETE FROM visionartdb.post_like WHERE	member_id = #{memberid} AND post_id = #{post_id}
 	</delete>
 	<!--likeTotal: post_like 테이블에서 전체 좋아요 정보를 조회하는 쿼리  -->
-	<select id="likeTotal" resultType="dto.UgLikeDTO">
+	<select id="likeTotal" resultType="uglikedto">
 		SELECT * FROM visionartdb.post_like;
 	</select>
 	<!--imageTotal: post_attachment 테이블에서 모든 이미지 정보를 조회하는 쿼리  -->
-	<select id="imageTotal" resultType="dto.UgImageDTO">
+	<select id="imageTotal" resultType="ugimagedto">
 		SELECT * FROM visionartdb.post_attachment;
 	</select>
 	
 	<!-- 마이페이지 관련 -->
 	<!--getMyPost: 특정 회원이 작성한 최근 게시물을 조회하는 쿼리  -->
-	<select id="getMyPost" resultType="dto.UgPostDTO">
+	<select id="getMyPost" resultType="ugpostdto">
 		SELECT * FROM visionartdb.post where
 		member_id = #{memberid} order by post_id DESC LIMIT #{postNumber};
 	</select>
 	<!--getMyAllPost: 특정 회원이 작성한 모든 게시물을 조회하는 쿼리  -->
-	<select id="getMyAllPost" resultType="dto.UgPostDTO">
+	<select id="getMyAllPost" resultType="ugpostdto">
 		SELECT * FROM visionartdb.post where
 		member_id = #{member_id} order by post_id DESC;
 	</select>

@@ -4,9 +4,9 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
-@ComponentScan(basePackages = {"config", "controller", "dao", "dto", "service"})
+//@ComponentScan(basePackages = {"config", "controller", "dao", "dto", "service"})
 
-@MapperScan(basePackages="dao")
+/*@MapperScan(basePackages="dao")*/
 @SpringBootApplication
 public class VisionArtApplication {
 

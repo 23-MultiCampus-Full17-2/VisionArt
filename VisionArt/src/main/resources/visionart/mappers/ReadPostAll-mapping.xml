@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="dao.ReadPostAllDAO">
+<mapper namespace="com.mc.full17th2.dao.ReadPostAllDAO">
 <!-- selectPosts: post 테이블에서 게시물을 조회하는 쿼리입니다. LIMIT와 OFFSET을 사용하여 페이징 처리가 이루어짐 
 #{limit} 및 #{offset}은 MyBatis의 파라미터 바인딩을 나타내며, 실행 시에 실제 값으로 대체됨 -->
-	<select id="selectPosts" resultType="dto.PostDTO">
+	<select id="selectPosts" resultType="postdto">
 		select * from visionartdb.post 
 		WHERE post_field_id = 0 
 		order by post_id DESC
@@ -15,7 +15,7 @@
 		select * from visionartdb.member
 	</select>
 	<!-- artfieldName  -->
-	<select id="getArtFieldName" resultType="dto.ArtFieldDTO">
+	<select id="getArtFieldName" resultType="artfielddto">
 	select * from visionartdb.art_field;
 	</select>
 	<!--selectTotalPosts: post 테이블에서 전체 게시물 수를 조회하는 쿼리  -->
@@ -45,7 +45,7 @@
 		SELECT * FROM visionartdb.post_like;
 	</select>
 	<!--imageTotal: post_attachment 테이블에서 모든 이미지 정보를 조회하는 쿼리  -->
-	<select id="imageTotal" resultType="dto.ImageDTO">
+	<select id="imageTotal" resultType="imagedto">
 		SELECT * FROM visionartdb.post_attachment;
 	</select>
 	
