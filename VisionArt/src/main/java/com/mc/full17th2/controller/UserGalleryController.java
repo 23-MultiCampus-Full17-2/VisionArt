@@ -35,15 +35,17 @@ public class UserGalleryController {
 
 	@PostMapping("/write")
 	public String writeProcess(HttpSession session,
-			@RequestParam(name = "art_field_id") int artFieldId,
+			@RequestParam(name = "art_field_id", defaultValue = "9") int artFieldId,
 			UgPostDTO2 ugPostDTO, UgImageDTO1 ugImageDTO) throws Exception {
-
-		int memberid = (int) session.getAttribute("memberid");
-		ugPostDTO.setMember_id(memberid);
+		 String memberIdStr = (String) session.getAttribute("memberId");
+    	 Integer memberId = (memberIdStr != null) ? Integer.parseInt(memberIdStr) : 0;
+		//int memberid = (int) session.getAttribute("memberid");
+		ugPostDTO.setMember_id(memberId);
 		// post_field_id 설정
 		ugPostDTO.setPost_field_id(1); // post_field_id를 1으로 설정
 		
-		// art_field_id 설정	 
+		
+	// art_field_id 설정	 
 		 ugPostDTO.setArt_field_id(artFieldId);
 		// Save post details
 		userGalleryService.insertPost(ugPostDTO);

@@ -57,5 +57,5 @@ public interface UgReadPostOneDAO {
 
 
 	public boolean isAdmin(int memberId);
-	
+	int deleteUGComment(int comment_id,int memberId);
 }

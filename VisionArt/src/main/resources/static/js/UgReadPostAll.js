@@ -7,20 +7,20 @@ document.addEventListener('DOMContentLoaded', function() {
     postTitles.forEach(function(postTitle) {
         postTitle.addEventListener('click', function() {
             let post_id = postTitle.dataset.postId; 
-            location.href = 'http://localhost:9071/post/' + post_id; //To Read Post One
+            location.href = 'http://localhost:9071/ug/' + post_id; //To Read Post One
         });
     });
     
     postImages.forEach(function(postImage) {
         postImage.addEventListener('click', function() {
             let post_id = postImage.dataset.postId; 
-            location.href = 'http://localhost:9071/post/' + post_id; //To Read Post One
+            location.href = 'http://localhost:9071/ug/' + post_id; //To Read Post One
         });
     });
     
     likeImages.forEach(function(likeImage) {
         likeImage.addEventListener('click', function() {
-            let post_id = likeImage.dataset.postId; 
+            let post_id = likeImage.dataset.postId;
             let member_id = likeImage.dataset.memberId; 
           console.log("post_id:", post_id, "member_id:", member_id); //값 확인
    
@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			    member_id = 0; // 값이 정의되어 있지 않거나 변환 불가능한 경우 기본값 0으로 설정
 			}
 			 // 값이 안전하게 변환된 후에 fetch 요청 보내기
-            fetch('http://localhost:9071/post?post_id=' + post_id + '&member_id=' + member_id, {
+            fetch('http://localhost:9071/ug?post_id=' + post_id + '&member_id=' + member_id, {
            		method: 'GET',
 	            headers: {
 	                'Content-Type': 'application/json',
@@ -51,3 +51,5 @@ document.addEventListener('DOMContentLoaded', function() {
         
     });
 });
+
+

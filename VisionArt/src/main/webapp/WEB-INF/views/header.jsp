@@ -23,12 +23,12 @@
         <input type="text" name="query" id="searchQuery" placeholder="검색...">
         <button type="submit">검색</button>
     </form>
-<div class="chat">
+<%-- <div class="chat">
 
 	<img src="${path}/icon/chat.png" width="60" height="60" alt="chat" 
 	id="chatBtn" onclick="handleChatBtn()">
 
-			</div>
+			</div> --%>
 	<div class="user_button">
 		<a href="/mypage" id="UserBtn">
 <img src="${path}/icon/user.png" width="50" height="50" alt="mypage"
@@ -37,10 +37,10 @@
 
 </div>  
 	<button type="button" class="headerBtn" id="loginBtn"
-	 data-session-value="<%= session.getAttribute("memberid")%>" 
+	 data-session-value="<%= session.getAttribute("memberId")%>" 
 	 onclick="location.href = '/login'">로그인</button>
     <button type="button" class="headerBtn" id="registerBtn" 
-    data-session-value="<%= session.getAttribute("memberid")%>" 
+    data-session-value="<%= session.getAttribute("memberId")%>" 
     onclick="location.href = '/register'">회원가입</button>
   </div>
 

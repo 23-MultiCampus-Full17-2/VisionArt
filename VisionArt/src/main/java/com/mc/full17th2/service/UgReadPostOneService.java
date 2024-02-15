@@ -1,5 +1,6 @@
 package com.mc.full17th2.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -91,4 +92,18 @@ public class UgReadPostOneService {
 	public boolean isAdmin(int memberId) {
 		return dao.isAdmin(memberId);
 	}
+	// 댓글 삭제
+    public HashMap<String,Object> deleteCommentOne(int comment_id,String memberIdString){
+        HashMap<String,Object> result=new HashMap<>();
+
+        if(memberIdString==null){
+            result.put("result","error0");
+        }else if(dao.deleteUGComment(comment_id,Integer.parseInt(memberIdString))==1){
+            result.put("result","ok");
+        }else{
+            result.put("result","error1");
+        }
+
+        return result;
+    }
 }

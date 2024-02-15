@@ -37,10 +37,12 @@
 	  <c:if test="${post_attachment.post_id == post.post_id}">
 		<c:set var="post_att_path" value="${post_attachment.post_att_path}" /> 
 	</c:if></c:forEach> 
-<img src="/visionart/${post_att_path}"  class="post-img1" data-post-id="${post.post_id}">
+<img src="/visionart/${post_att_path}" class="post-img1" data-post-id="${post.post_id}" data-post-field-id="${post.post_field_id}">
 
  
-	<a class="post-subject1" data-post-id="${post.post_id}">${post.title}</a>
+	<a class="post-subject1" data-post-id="${post.post_id}" data-post-field-id="${post.post_field_id}">
+    ${post.title}
+</a>
 	
 	
 			
@@ -67,8 +69,9 @@
 		</c:forEach>
 
 		<img src="${likeImage}" class="like-img"
-		data-member-id="${session.getAttribute('memberid')}"
-		data-post-id="${post.post_id}">
+    data-member-id="${session.getAttribute('memberId')}"
+    data-post-id="${post.post_id}"
+    data-post-field-id="${post.post_field_id}">
 
 		<p class="like-num">
 		<c:set var="likeNum" value="0" />
@@ -106,9 +109,10 @@
 					<c:if test="${status.index == 2}">
 						<img src="${path}/icon/medal3.jpg" class="topClass">
 					</c:if>
-				<img src="/visionart/${post_att_path}" class="post-img"
-						data-post-id="${popPost.post_id}">
-					<a class="post-subject" data-post-id="${popPost.post_id}">${popPost.title}</a>
+			<img src="/visionart/${post_att_path}" class="post-img" data-post-id="${popPost.post_id}" data-post-field-id="${popPost.post_field_id}">
+					<a class="post-subject" data-post-id="${popPost.post_id}" data-post-field-id="${popPost.post_field_id}">
+    ${popPost.title}
+</a>
 						
 			<div class="art-field">
 				<p class="art-field-name" data-post-id="${popPost.post_id}">
@@ -141,8 +145,9 @@
 						</c:forEach>
 
 						<img src="${likeImage}" class="like-img"
-							data-member-id="${session.getAttribute('memberid')}"
-							data-post-id="${popPost.post_id}">
+		    data-member-id="${session.getAttribute('memberId')}"
+		    data-post-id="${popPost.post_id}"
+		    data-post-field-id="${popPost.post_field_id}">
 
 						<p class="like-num">
 							<c:set var="likeNum" value="0" />
@@ -186,9 +191,10 @@
 							<c:set var="post_att_path" value="${post_attachment.post_att_path}" /> 
 						</c:if>
 					</c:forEach>
-<img src="/visionart/${post_att_path}"  class="post-img"
-						data-post-id="${post.post_id}">
-					<a class="post-subject" data-post-id="${post.post_id}">${post.title}</a>
+<img src="/visionart/${post_att_path}" class="post-img" data-post-id="${post.post_id}" data-post-field-id="${post.post_field_id}">
+					<a class="post-subject" data-post-id="${post.post_id}" data-post-field-id="${post.post_field_id}">
+    ${post.title}
+</a>
 		
 		<span class="viewCount" data-post-id="${post.post_id}"> ${post.views}</span>	
 					
@@ -212,8 +218,9 @@
 						</c:forEach>
 
 						<img src="${likeImage}" class="like-img"
-							data-member-id="${session.getAttribute('memberid')}"
-							data-post-id="${post.post_id}">
+    data-member-id="${session.getAttribute('memberId')}"
+    data-post-id="${post.post_id}"
+    data-post-field-id="${post.post_field_id}">
 
 						<p class="like-num">
 							<c:set var="likeNum" value="0" />
@@ -253,7 +260,81 @@
 			</c:if>
 		</ul>
 </section>
+<script>
 
+
+document.addEventListener('DOMContentLoaded', function() {
+	let sessionId = '<%= session.getAttribute("memberId") != null ? session.getAttribute("memberId") : "0" %>';
+	// post_id를 클릭한 postBox에서 가져와서 새로운 URL로 이동
+	let postSubjects = document.querySelectorAll('.post-subject');
+	let postSubjects1 = document.querySelectorAll('.post-subject1');
+	let postImages = document.querySelectorAll('.post-img');
+	let postImages1 = document.querySelectorAll('.post-img1');
+	let likeImages = document.querySelectorAll('.like-img');
+	let likeNums = document.querySelectorAll('.like-num');
+	
+	postSubjects.forEach(function(postSubject) {
+		postSubject.addEventListener('click', function() {
+			
+					let post_id = postSubject.dataset.postId; 
+					let post_field_id = postSubject.dataset.postFieldId;
+            console.log("post_id:", post_id);
+            console.log("post_field_id:", post_field_id);
+			     if (post_field_id === "1") {
+                location.href = 'http://localhost:9071/ug/' + post_id;
+            } else if (post_field_id === "2") {
+                location.href = 'http://localhost:9071/fg/' + post_id;
+            }
+        });
+    });
+		postSubjects1.forEach(function(postSubject1) {
+		postSubject1.addEventListener('click', function() {
+					let post_id = postSubject1.dataset.postId; 
+					location.href = 'http://localhost:9071/post/' + post_id;
+			});
+	});
+	
+	postImages.forEach(function(postImage) {
+        postImage.addEventListener('click', function() {
+            let post_id = postImage.dataset.postId; 
+            let post_field_id = postImage.dataset.postFieldId;
+
+            if (post_field_id === "1") {
+                location.href = 'http://localhost:9071/ug/' + post_id;
+            } else if (post_field_id === "2") {
+                location.href = 'http://localhost:9071/fg/' + post_id;
+            }
+        });
+    });
+	postImages1.forEach(function(postImage1) {
+			postImage1.addEventListener('click', function() {
+					let post_id = postImage1.dataset.postId; 
+					location.href = 'http://localhost:9071/post/' + post_id;
+			});
+	});
+	
+	likeImages.forEach(function(likeImage) {
+        likeImage.addEventListener('click', function() {
+            let post_id = likeImage.dataset.postId; 
+            let member_id = likeImage.dataset.memberId; 
+            if (sessionId === "0") {
+                alert("로그인이 필요합니다.");
+            } else {
+                fetch('http://localhost:9071/post?post_id=' + post_id + '&member_id=' + member_id, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        // You can add more headers if needed
+                    },
+                })
+                .then(() => {
+                    location.reload();
+                });
+            }
+        });
+    });
+});
+</script>
 <%@ include file="footer.jsp" %>
 </body>
 </html>

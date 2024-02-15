@@ -14,8 +14,8 @@
 <script src="${path}/js/UgReadPostOne.js"></script>
 </head>
 <script>
-	let sessionId = <%=session.getAttribute("memberid")%>;
-
+<%-- 	let sessionId = <%=session.getAttribute("memberId")%>; --%>
+let sessionId = '<%= session.getAttribute("memberId") != null ? session.getAttribute("memberId") : "0" %>';
 	$(document).ready(function(){
    		showData();
    		likeBtnClick();
@@ -58,24 +58,32 @@
 	};
 	
 	function likeBtnClick() {
-	   $("#likeBtnText").html("${ugReadPostOne.uglikeCnt}");
-	   
-	   $("#likeBtn").on("click", function(){
-		   var data = {post_id: ${ugReadPostOne.ugPostInfo.post_id}, member_id: sessionId};
-		   
-		   $.ajax({
-			   url: "/ug/like",
-			   type: "post",
-			   data: JSON.stringify(data),
-			   contentType: "application/json",
-			   dataType: "json",
-			   success: function(response){
-				   $("#likeBtnText").html(response);},
-			   error: function(request, e){
-				   alert("코드: " + request.status + "메시지: " + request.responseText + "오류: " + e);}
-		   });
-	   });
-	};
+	    // 좋아요 버튼 클릭 시 처리 함수
+	    $("#likeBtnText").html("${ugReadPostOne.uglikeCnt}");
+
+	    $("#likeBtn").on("click", function(){
+	        let post_id = ${ugReadPostOne.ugPostInfo.post_id};
+	        let data = { post_id: post_id, member_id: sessionId };
+
+	        if (!sessionId || sessionId === "0") {
+	            alert("로그인이 필요합니다.");
+	        } else {
+	            $.ajax({
+	                url: "/ug/like",
+	                type: "post",
+	                data: JSON.stringify(data),
+	                contentType: "application/json",
+	                dataType: "json",
+	                success: function(response){
+	                    $("#likeBtnText").html(response);
+	                },
+	                error: function(request, e){
+	                    alert("좋아요 요청에 실패했습니다. 다시 시도해주세요.");
+	                }
+	            });
+	        }
+	    });
+	}
 	
 	function shareBtnClick() {
 		let share = document.getElementById("share");
@@ -159,31 +167,24 @@
 			}
 		});
 	};
-   
-	function deleteCommentBtn(comment_id) {		
-		if(sessionId == ${ugReadPostOne.ugPostInfo.member_id}){
-			let isDelete = confirm("해당 댓글을 삭제하시겠습니까?");
-			if (isDelete){
-				$(`#${'${comment_id}'}`).remove();
-				$.ajax({
-					url: "/ug/comment/delete",
-					data: {"comment_id": `${'${comment_id}'}`},
-					type: "post",
-					dataType: "json",
-					success: function(response){
-						location.reload();
-						console.log("Comment deleted successfully");
-					},
-					error: function(request, e){
-						alert("코드: " + request.status + "메시지: " + request.responseText + "오류: " + e);
-						console.error("Error deleting comment", error);
-					}
-				});
-			};
-		} else{
-			alert("해당 댓글을 삭제할 수 있는 권한이 없습니다.");
-		}
-	};
+	function deleteCommentBtn(comment_id) {    
+	    $.ajax({
+	        type: "post",
+	        url: "/ug/comment/delete/" + comment_id,  // 여기서 comment_id를 경로 변수로 전달
+	        dataType: "json",
+	        success: function (response) {
+	            if (response.result === "ok") {
+	                console.log(response.result);
+	                $("#" + comment_id).remove();
+	            } else {
+	                alert("댓글삭제 권한이 없습니다.");
+	            }
+	        }
+	    });
+	}
+
+
+
    
 	function updateDelMenu() {
 		$("#updatePostBtn").on("click", function(){

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.mc.full17th2.dto.ArtFieldDTO;
 import com.mc.full17th2.dto.ImageDTO;
 import com.mc.full17th2.dto.LikeDTO;
-import com.mc.full17th2.dto.MemberDTO;
+import com.mc.full17th2.dto.MemberDTO2;
 import com.mc.full17th2.dto.PostDTO;
 
 @Repository
@@ -27,7 +27,7 @@ public interface HomeDAO {
 	public List<PostDTO> selectPopPosts2(List<Integer> id);
 	
 //sub	
-	public List<MemberDTO> selectMembers();
+	public List<MemberDTO2> selectMembers();
 	
 	public List<ArtFieldDTO> getArtFieldName();
 	
@@ -36,7 +36,7 @@ public interface HomeDAO {
 	
 //likes
 	
-	public List<LikeDTO> selectLikes(int memberid);
+	public List<LikeDTO> selectLikes(int memberId);
 	
 	public void updateLike(int member_id, int post_id);
 	

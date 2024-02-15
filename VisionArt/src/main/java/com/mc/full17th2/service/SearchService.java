@@ -10,7 +10,7 @@ import com.mc.full17th2.dao.SearchDAO;
 import com.mc.full17th2.dto.ArtFieldDTO;
 import com.mc.full17th2.dto.ImageDTO;
 import com.mc.full17th2.dto.LikeDTO;
-import com.mc.full17th2.dto.MemberDTO;
+import com.mc.full17th2.dto.MemberDTO2;
 import com.mc.full17th2.dto.PostDTO;
 import com.mc.full17th2.dto.ReadSearchAllAuthorDTO;
 import com.mc.full17th2.dto.ReadSearchAllCategoryDTO;
@@ -31,7 +31,7 @@ public class SearchService {
 	public ReadSearchAllDTO searchAll(String query, int page, int pageSize) {
 		int offset = page * pageSize;
 		List<PostDTO> posts = dao.selectSearchPosts(query,offset, pageSize);
-		List<MemberDTO> members = dao.selectMembers();
+		List<MemberDTO2> members = dao.selectMembers();
 		List<ArtFieldDTO> hitArts= dao.getArtFieldName();
 		
 		return new ReadSearchAllDTO(posts, members, hitArts);
@@ -40,7 +40,7 @@ public class SearchService {
 	public ReadSearchAllUgDTO searchAllUg(String query, int page, int pageSize) {
 		int offset = page * pageSize;
 		List<PostDTO> posts = dao.selectSearchUgPosts(query,offset, pageSize);
-		List<MemberDTO> members = dao.selectMembers();
+		List<MemberDTO2> members = dao.selectMembers();
 		List<ArtFieldDTO> arts= dao.getArtFieldName();
 		
 		return new ReadSearchAllUgDTO(posts, members, arts);
@@ -49,7 +49,7 @@ public class SearchService {
 	public ReadSearchAllFgDTO searchAllFg(String query, int page, int pageSize) {
 		int offset = page * pageSize;
 		List<PostDTO> posts = dao.selectSearchFgPosts(query,offset, pageSize);
-		List<MemberDTO> members = dao.selectMembers();
+		List<MemberDTO2> members = dao.selectMembers();
 		List<ArtFieldDTO> arts= dao.getArtFieldName();
 		
 		return new ReadSearchAllFgDTO(posts, members, arts);
@@ -64,7 +64,7 @@ public class SearchService {
 	        arts = new ArrayList<>();
 	    }
 
-	    List<MemberDTO> members = dao.selectMembers();
+	    List<MemberDTO2> members = dao.selectMembers();
 
 	    // posts 값이 없을 경우를 대비한 초기화
 	    List<PostDTO> posts = dao.selectSearchGalleryPosts(arts,offset, pageSize);
@@ -78,7 +78,7 @@ public class SearchService {
 	public ReadSearchAllAuthorDTO searchAllAuthor(String query, int page, int pageSize) {
 		 int offset = page * pageSize;
 
-		    List<MemberDTO> members = dao.selectMembersWithQuery(query);
+		    List<MemberDTO2> members = dao.selectMembersWithQuery(query);
 		    if (members == null) {
 		    	members = new ArrayList<>();
 		    }
@@ -101,8 +101,8 @@ public class SearchService {
 	}
 
 	//likes
-	public List<LikeDTO> getLikes(int memberid){
-		return dao.selectLikes(memberid);
+	public List<LikeDTO> getLikes(int memberId){
+		return dao.selectLikes(memberId);
 	}
 	
 	public void updateLike(int member_id, int post_id) {

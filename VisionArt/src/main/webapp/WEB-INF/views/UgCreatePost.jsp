@@ -10,7 +10,7 @@
 <title>VisionArt</title>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <script src="${path}/js/UgCreatePost.js"></script>
-<script src="${path}/sjs/jquery-3.7.1.min.js"></script>
+<script src="${path}/js/jquery-3.7.1.min.js"></script>
 <link href="${path}/css/ugcreatepost.css" rel="stylesheet" type="text/css">
 </head>
 <body>
@@ -36,8 +36,8 @@
 			        <option value="디지털 그림" ${artFieldId == 6 ? 'selected' : ''}>디지털 그림</option>
 			        <option value="실사" ${artFieldId == 7 ? 'selected' : ''}>실사</option>
 			        <option value="동양화" ${artFieldId == 8 ? 'selected' : ''}>동양화</option>
-			        <option value="기타" ${artFieldId == 9 ? 'selected' : ''}>기타</option>
-			   <option value="그냥" ${artFieldId == 15 ? 'selected' : 'selected'}>카테고리선택하기</option>
+			        <option value="기타" ${artFieldId == 9 ? 'selected' : 'selected'}>기타</option>
+			 
 			    </select>
 				</div>
 					<p>제목</p>
@@ -90,9 +90,7 @@
             case "기타":
                 artFieldIdInput.value = 9;
                 break;
-            case "카테고리선택하기":
-                artFieldIdInput.value = 15;
-                break; 
+        
             default:
                 // 선택하지 않았을 때의 기본값 설정
                 artFieldIdInput.value = 9; // 기타
@@ -100,6 +98,8 @@
         }
         console.log("Art Field ID: " + artFieldIdInput.value);
     }
+ // 페이지 로드 시 초기 값 확인을 위해 호출
+    setArtFieldId();
 </script>
 <%@ include file="footer.jsp" %>
 </body>

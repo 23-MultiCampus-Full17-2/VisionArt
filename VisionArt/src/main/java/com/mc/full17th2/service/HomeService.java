@@ -12,7 +12,7 @@ import com.mc.full17th2.dto.HomeDTO;
 import com.mc.full17th2.dto.HomeForGalleryDTO;
 import com.mc.full17th2.dto.ImageDTO;
 import com.mc.full17th2.dto.LikeDTO;
-import com.mc.full17th2.dto.MemberDTO;
+import com.mc.full17th2.dto.MemberDTO2;
 import com.mc.full17th2.dto.PostDTO;
 
 @Service
@@ -26,7 +26,7 @@ public class HomeService {
 		int offset = page * pageSize;
 		// 수정된 부분: 자유게시판 데이터만 가져오도록 변경 (post_field_id = 0)
 		List<PostDTO> hitPosts = dao.hitSelectPostsHome(offset, pageSize);
-		List<MemberDTO> members = dao.selectMembers();
+		List<MemberDTO2> members = dao.selectMembers();
 		List<ArtFieldDTO> hitArts= dao.getArtFieldName();
 		return new HitHomeDTO(hitPosts, members,hitArts);
 	}
@@ -35,14 +35,14 @@ public class HomeService {
 	public HomeForGalleryDTO getHome(int page, int pageSize) {
 		int offset = page * pageSize;
 		List<PostDTO> postsForGallery = dao.selectPostsForGalleryHome(offset, pageSize);
-		List<MemberDTO> members = dao.selectMembers();
+		List<MemberDTO2> members = dao.selectMembers();
 		List<ArtFieldDTO> arts= dao.getArtFieldName();
 		return new HomeForGalleryDTO(postsForGallery, members, arts);
 	}
 	// part3
 	public HomeDTO getPopPosts(List<Integer> id) { 
 		List<PostDTO> posts = dao.selectPopPosts2(id); 
-		List<MemberDTO> members = dao.selectMembers();
+		List<MemberDTO2> members = dao.selectMembers();
 		List<ArtFieldDTO> arts= dao.getArtFieldName();
 		
 		return new HomeDTO(posts, members, arts);
@@ -58,8 +58,8 @@ public class HomeService {
 	}
 	
 	
-	public List<LikeDTO> getLikes(int memberid){
-		return dao.selectLikes(memberid);
+	public List<LikeDTO> getLikes(int memberId){
+		return dao.selectLikes(memberId);
 	}
 	
 	public void updateLike(int member_id, int post_id) {

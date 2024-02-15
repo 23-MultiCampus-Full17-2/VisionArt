@@ -19,15 +19,15 @@ public interface UgReadPostAllDAO {
 	public List<UgMemberDTO> selectUgMembers();
 	public List<UgArtFieldDTO> getArtFieldName();
 	public int getTotalPosts();
-	public List<UgLikeDTO> getLikes(int memberid);
-	public void updateLike(int memberid, int post_id);
-	public long likeExists(int memberid, int post_id);
-	public void deleteLike(int memberid, int post_id);
+	public List<UgLikeDTO> getLikes(int memberId);
+	public void updateLike(int memberId, int post_id);
+	public long likeExists(int memberId, int post_id);
+	public void deleteLike(int memberId, int post_id);
 	public List<UgLikeDTO> likeTotal() ;
 	public List<UgImageDTO> imageTotal();
-	public List<UgPostDTO> getMyPost(int memberid, int postNumber);
-	public List<UgPostDTO> getMyAllPost(int memberid);
-	public int validatePw(int memberid, String password);
+	public List<UgPostDTO> getMyPost(int memberId, int postNumber);
+	public List<UgPostDTO> getMyAllPost(int memberId);
+	public int validatePw(int memberId, String password);
 	
 	
 

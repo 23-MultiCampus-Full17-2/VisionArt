@@ -3,6 +3,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mc.full17th2.dao.ReadPostAllDAO">
 <!-- selectPosts: post 테이블에서 게시물을 조회하는 쿼리입니다. LIMIT와 OFFSET을 사용하여 페이징 처리가 이루어짐 
+
 #{limit} 및 #{offset}은 MyBatis의 파라미터 바인딩을 나타내며, 실행 시에 실제 값으로 대체됨 -->
 	<select id="selectPosts" resultType="postdto">
 		select * from visionartdb.post 
@@ -11,7 +12,7 @@
 		LIMIT #{pageSize} OFFSET #{offset}
 	</select>
 	<!--selectMembers: member 테이블에서 모든 회원 정보를 조회하는 쿼리  -->
-	<select id="selectMembers" resultType="memberdto">
+	<select id="selectMembers" resultType="memberdto2">
 		select * from visionartdb.member
 	</select>
 	<!-- artfieldName  -->
@@ -22,9 +23,39 @@
 	<select id="getTotalPosts" resultType="int">
 		SELECT COUNT(*) AS totalPosts FROM visionartdb.post WHERE post_field_id = 0
 	</select>
+	
+	
+	<!-- selectPosts: post 테이블에서 게시물을 조회하는 쿼리입니다. LIMIT와 OFFSET을 사용하여 페이징 처리가 이루어짐 
+#{limit} 및 #{offset}은 MyBatis의 파라미터 바인딩을 나타내며, 실행 시에 실제 값으로 대체됨 -->
+	  <select id="selectUgPostsByPostField" resultType="ugpostdto">
+        SELECT * FROM visionartdb.post WHERE post_field_id = 1 ORDER BY post_id DESC
+        LIMIT #{pageSize} OFFSET #{offset}
+    </select>
+
+	<!--selectMembers: member 테이블에서 모든 회원 정보를 조회하는 쿼리  -->
+	<select id="selectUgMembers" resultType="ugmemberdto">
+		select * from visionartdb.member
+	</select>
+	
+		<!--selectMembers: member 테이블에서 모든 회원 정보를 조회하는 쿼리  -->
+	<select id="selectUgMembersButMe" parameterType="int" resultType="ugmemberdto">
+		select * from visionartdb.member
+		WHERE
+		member_id = #{member_id} order by post_id DESC;
+	</select>
+	
+	<!--selectTotalPosts: post 테이블에서 전체 게시물 수를 조회하는 쿼리  -->
+	<select id="getUgTotalPosts" resultType="int">
+		SELECT COUNT(*) AS totalPosts FROM visionartdb.post WHERE post_field_id = 1
+	</select>
+	<!-- artfieldName  -->
+	<select id="getUgArtFieldName" resultType="ugartfielddto">
+	select * from visionartdb.art_field;
+	</select>
+	
 	<!--getLikes: post_like 테이블에서 특정 회원이 좋아요를 누른 게시물을 조회하는 쿼리  -->
 	<select id="getLikes" resultType="likedto" parameterType="int">
-		SELECT * FROM visionartdb.post_like where member_id = #{member_id}
+		SELECT * FROM visionartdb.post_like where member_id = #{memberId}
 	</select>
 	<!-- updateLike: post_like 테이블에 좋아요 정보를 추가하는 쿼리  -->
 <insert id="updateLike" parameterType="map">
@@ -49,49 +80,7 @@
 		SELECT * FROM visionartdb.post_attachment;
 	</select>
 	
-	<!-- 마이페이지 관련 -->
-	<!--getMyPost: 특정 회원이 작성한 최근 게시물을 조회하는 쿼리  -->
-	<select id="getMyPost" resultType="postdto">
-		SELECT * FROM visionartdb.post where
-		member_id = #{memberid} order by post_id DESC LIMIT #{postNumber};
-	</select>
-	<!--getMyAllPost: 특정 회원이 작성한 모든 게시물을 조회하는 쿼리  -->
-	<select id="getMyAllPost" resultType="postdto">
-		SELECT * FROM visionartdb.post where
-		member_id = #{member_id} order by post_id DESC;
-	</select>
-		<!--validatePw: 회원의 비밀번호를 확인하는 쿼리  -->
-	<select id="validatePw" resultType="int" parameterType="map">
-		SELECT
-		COUNT(*) FROM visionartdb.member where member_id = #{memberid} AND password =
-		#{password}
-	</select>
-
-	<!-- 삭제 관련 -->
-		<!--deleteMember: 특정 회원을 삭제하는 쿼리  -->
-	<delete id="deleteMember" parameterType="map">
-		DELETE FROM visionartdb.member
-		WHERE member_id = #{member_id}
-	</delete>
 	
-	<!--selectAllNotice: inform 테이블에서 모든 공지사항을 조회하는 쿼리  -->
-	<select id="selectAllNotice" resultType="informdto">
- 		SELECT * FROM inform;
- 	</select>
-	<!-- updateNotice: inform 테이블에 새로운 공지사항을 추가하는 쿼리 -->
-	<insert id="updateNotice" parameterType="map">
- 		INSERT INTO inform (title, textbox) 
- 		VALUES(#{title}, #{textbox})
- 	</insert>
- 		<!--deleteNotice: inform 테이블에서 특정 공지사항을 삭제하는 쿼리  -->
- 	<delete id="deleteNotice" parameterType="map">
- 		DELETE FROM inform WHERE informid = #{informId}
- 	</delete>
- 
- 	
- 	<!-- 추가된 내용(notice) -->
- 		<!-- selectAuthority: 특정 회원의 권한을 조회하는 쿼리 -->
- 	<select id="selectAuthority" resultType="boolean" parameterType="int">
- 		SELECT authority FROM visionartdb.member WHERE member_id = #{member_id} 
- 	</select>
+	
+	
 </mapper>

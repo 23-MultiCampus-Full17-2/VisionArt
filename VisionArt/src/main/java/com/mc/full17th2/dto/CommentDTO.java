@@ -2,6 +2,7 @@ package com.mc.full17th2.dto;
 
 public class CommentDTO {
 	private int comment_id;
+	
 	private String comment_content;
 	private String comment_datetime;
 	//

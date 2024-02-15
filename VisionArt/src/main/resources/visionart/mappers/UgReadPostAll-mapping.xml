@@ -27,17 +27,17 @@
 	</select>
 	<!-- updateLike: post_like 테이블에 좋아요 정보를 추가하는 쿼리  -->
 <insert id="updateLike" parameterType="map">
-    INSERT INTO visionartdb.post_like (member_id, post_id) VALUES (#{memberid}, #{post_id})
+    INSERT INTO visionartdb.post_like (member_id, post_id) VALUES (#{memberId}, #{post_id})
 </insert>
 
 	<!--likeExists: post_like 테이블에서 특정 회원이 특정 게시물에 대해 좋아요를 눌렀는지 확인하는 쿼리-->
 	<select id="likeExists" resultType="long" parameterType="map">
-    SELECT COUNT(*) FROM visionartdb.post_like WHERE member_id = #{memberid} AND post_id = #{post_id};
+    SELECT COUNT(*) FROM visionartdb.post_like WHERE member_id = #{memberId} AND post_id = #{post_id};
 </select>
 
 	<!--deleteLikes: post_like 테이블에서 특정 회원이 특정 게시물에 대한 좋아요를 취소하는 쿼리  -->
 	<delete id="deleteLike" parameterType="map">
-		DELETE FROM visionartdb.post_like WHERE	member_id = #{memberid} AND post_id = #{post_id}
+		DELETE FROM visionartdb.post_like WHERE	member_id = #{memberId} AND post_id = #{post_id}
 	</delete>
 	<!--likeTotal: post_like 테이블에서 전체 좋아요 정보를 조회하는 쿼리  -->
 	<select id="likeTotal" resultType="uglikedto">
@@ -52,7 +52,7 @@
 	<!--getMyPost: 특정 회원이 작성한 최근 게시물을 조회하는 쿼리  -->
 	<select id="getMyPost" resultType="ugpostdto">
 		SELECT * FROM visionartdb.post where
-		member_id = #{memberid} order by post_id DESC LIMIT #{postNumber};
+		member_id = #{memberId} order by post_id DESC LIMIT #{postNumber};
 	</select>
 	<!--getMyAllPost: 특정 회원이 작성한 모든 게시물을 조회하는 쿼리  -->
 	<select id="getMyAllPost" resultType="ugpostdto">
@@ -62,7 +62,7 @@
 		<!--validatePw: 회원의 비밀번호를 확인하는 쿼리  -->
 	<select id="validatePw" resultType="int" parameterType="map">
 		SELECT
-		COUNT(*) FROM visionartdb.member where member_id = #{memberid} AND password =
+		COUNT(*) FROM visionartdb.member where member_id = #{memberId} AND password =
 		#{password}
 	</select>
 

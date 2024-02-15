@@ -31,21 +31,21 @@ public class UgReadPostAllService {
 		return dao.getTotalPosts();
 	}
 	
-	public List<UgLikeDTO> getLikes(int memberid){
-		return dao.getLikes(memberid);
+	public List<UgLikeDTO> getLikes(int memberId){
+		return dao.getLikes(memberId);
 	}
 	
-	public void updateLike(int memberid, int post_id) {
-		dao.updateLike(memberid, post_id);
+	public void updateLike(int memberId, int post_id) {
+		dao.updateLike(memberId, post_id);
 	}
 	
-	public boolean likeExists(int memberid, int post_id) {
-		  long count = dao.likeExists(memberid, post_id);
+	public boolean likeExists(int memberId, int post_id) {
+		  long count = dao.likeExists(memberId, post_id);
 		  return count > 0;// count가 0보다 크면 true, 그렇지 않으면 false 반환
 	}
 	
-	public void deleteLike(int memberid, int post_id) {
-		dao.deleteLike(memberid, post_id);
+	public void deleteLike(int memberId, int post_id) {
+		dao.deleteLike(memberId, post_id);
 	}
 	
 	public List<UgLikeDTO> likeTotal(){
@@ -57,8 +57,8 @@ public class UgReadPostAllService {
 	}
 	
 	/* My Page      */
-	public List<UgPostDTO> getMyPost(int memberid, int postNumber){
-		return dao.getMyPost(memberid, postNumber);
+	public List<UgPostDTO> getMyPost(int memberId, int postNumber){
+		return dao.getMyPost(memberId, postNumber);
 	}
 	
 	public List<UgPostDTO> getMyAllPost(int member_id){

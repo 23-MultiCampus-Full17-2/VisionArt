@@ -20,6 +20,7 @@ import com.mc.full17th2.dto.ReadSearchAllFgDTO;
 import com.mc.full17th2.dto.ReadSearchAllUgDTO;
 import com.mc.full17th2.service.HomeService;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -29,14 +30,24 @@ public class HomeController {
     HomeService service;
 
     @GetMapping("/")
-    public String home(Model model, @RequestParam(defaultValue = "0") int page, HttpSession session,
+    public String home(HttpServletRequest request,Model model, @RequestParam(defaultValue = "0") int page, HttpSession session,
             @RequestParam(required = false) Integer post_id, @RequestParam(required = false) Integer member_id) {
-
-        Integer memberIdObj = (Integer) session.getAttribute("memberid");
-        int memberid = (memberIdObj != null) ? memberIdObj : 0;
-
+    	
+    	
+    	// Integer memberIdObj = (Integer) session.getAttribute("memberId");
+    	 System.out.println(session.getAttribute("memberId"));
+       // Integer memberIdObj = (Integer) session.getAttribute("memberid");
+        //int memberId = (memberIdObj != null) ? memberIdObj : 0;
+    	 String memberIdStr = (String) session.getAttribute("memberId");
+    	 Integer memberId = (memberIdStr != null) ? Integer.parseInt(memberIdStr) : 0;
+    	 // 직접 HttpServletRequest를 사용하여 파라미터 값 확인
+    	    String memberIdParam = request.getParameter("member_id");
+    	    String postIdParam = request.getParameter("post_id");
+    	    System.out.println("Member ID (from session): " + memberId);
+    	    System.out.println("Member ID (from request): " + memberIdParam);
+    	    System.out.println("Post ID (from request): " + postIdParam);
         // 좋아요 버튼 동작 부분
-        if (memberid != 0 && post_id != null && member_id != null) {
+        if (memberId != 0 && post_id != null && member_id != null) {
             boolean result = service.likeExists(member_id, post_id);
 
             if (result) {
@@ -46,7 +57,7 @@ public class HomeController {
             }
         }
 
-        List<LikeDTO> likes = service.getLikes(memberid);
+        List<LikeDTO> likes = service.getLikes(memberId);
         List<LikeDTO> likeTotal = service.likeTotal();
         List<ImageDTO> images = service.imageTotal();
         int pageSize = 5;

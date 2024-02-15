@@ -4,12 +4,12 @@ import java.util.List;
 
 public class HomeForGalleryDTO {
 	private List<PostDTO> postsForGallery;
-	private List<MemberDTO> members;
+	private List<MemberDTO2> members;
 	private List<ArtFieldDTO> arts;
 	
 	public HomeForGalleryDTO() {}
 
-	public HomeForGalleryDTO(List<PostDTO> postsForGallery, List<MemberDTO> members, List<ArtFieldDTO> arts) {
+	public HomeForGalleryDTO(List<PostDTO> postsForGallery, List<MemberDTO2> members, List<ArtFieldDTO> arts) {
 		this.postsForGallery = postsForGallery;
 		this.members = members;
 		this.arts = arts;
@@ -23,11 +23,11 @@ public class HomeForGalleryDTO {
 		this.postsForGallery = postsForGallery;
 	}
 
-	public List<MemberDTO> getMembers() {
+	public List<MemberDTO2> getMembers() {
 		return members;
 	}
 
-	public void setMembers(List<MemberDTO> members) {
+	public void setMembers(List<MemberDTO2> members) {
 		this.members = members;
 	}
 

@@ -4,12 +4,12 @@ import java.util.List;
 
 public class HomeDTO {
 	private List<PostDTO> posts;
-	private List<MemberDTO> members;
+	private List<MemberDTO2> members;
 	private List<ArtFieldDTO> arts;
 	
 	public HomeDTO() {}
 
-	public HomeDTO(List<PostDTO> posts, List<MemberDTO> members, List<ArtFieldDTO> arts) {
+	public HomeDTO(List<PostDTO> posts, List<MemberDTO2> members, List<ArtFieldDTO> arts) {
 		this.posts = posts;
 		this.members = members;
 		this.arts = arts;
@@ -23,11 +23,11 @@ public class HomeDTO {
 		this.posts = posts;
 	}
 
-	public List<MemberDTO> getMembers() {
+	public List<MemberDTO2> getMembers() {
 		return members;
 	}
 
-	public void setMembers(List<MemberDTO> members) {
+	public void setMembers(List<MemberDTO2> members) {
 		this.members = members;
 	}
 

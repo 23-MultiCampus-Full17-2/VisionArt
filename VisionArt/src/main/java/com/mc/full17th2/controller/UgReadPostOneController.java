@@ -1,5 +1,6 @@
 package com.mc.full17th2.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ import com.mc.full17th2.dto.UgPostDTO;
 import com.mc.full17th2.dto.UgReadPostOneDTO;
 import com.mc.full17th2.service.UgReadPostOneService;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -65,28 +67,14 @@ public class UgReadPostOneController {
 		
 		return request;
 	}
-	
-	
-	@PostMapping("/ug/comment/delete")
+	@PostMapping("/ug/comment/delete/{comment_id}")
 	@ResponseBody
-	public boolean deleteComment(@RequestParam int comment_id, HttpSession session) {
-		  try {
-		        int res = service.deleteComment(comment_id);
+	public HashMap<String, Object> deleteComment(@PathVariable Integer comment_id, HttpServletRequest request) {
+	    return service.deleteCommentOne(comment_id, (String) request.getSession().getAttribute("memberId"));
+	}
 
-		        if (res > 0) {
-		            return true;
-		        } else {
-		            return false;
-		        }
-		    } catch (Exception e) {
-		        // 예외 발생 시 에러 로그를 출력
-		        e.printStackTrace();
-		        return false;
-		    }
-		}
-	
 
-	@PostMapping("/ug/post/like")
+	@PostMapping("/ug/like")
 	@ResponseBody
 	public int clickLike(@RequestBody LikeRq request) {
 		int isClick = service.selectLike(request.getPost_id(), request.getMember_id());

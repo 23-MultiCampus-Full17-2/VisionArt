@@ -76,7 +76,7 @@
 						</c:forEach>
 
 						<img src="${likeImage}" class="like-img"
-							data-member-id="${session.getAttribute('memberid')}"
+							data-member-id="${session.getAttribute('memberId')}"
 							data-post-id="${post.post_id}">
 
 						<p class="like-num">
@@ -160,8 +160,8 @@
 							</c:if>
 						</c:forEach>
 
-						<img src="${likeImage}" class="like-img2"
-							data-member-id="${session.getAttribute('memberid')}"
+						<img src="${likeImage}" class="like-img"
+							data-member-id="${session.getAttribute('memberId')}"
 							data-post-id="${post.post_id}">
 
 						<p class="like-num">
@@ -185,12 +185,12 @@
 </section>
 		</section>
 
-<%-- 	<!-- part3 -->
+	<!-- part3 -->
 	
 	<section class="category">
 	
 		<div id="title">
-	<img src="${path}/icon/new.jpg">
+<%-- 	<img src="${path}/icon/new.jpg"> --%>
 		<h5>명화 갤러리</h5></div>
 			<section class="post">
 <!--게시물 목록 섹션:
@@ -208,7 +208,9 @@
 				</c:if>
 				</c:forEach>
 				</p>
-				<div class="art-field-id" data-post-id="${post.post_id}">${post.art_field_id}</div>
+				
+<div class="art-field-id" data-post-id="${post.post_id}" style="display: none;">${post.art_field_id}</div>
+			
 			</div>
 			
 					<c:forEach var="post_attachment" items="${images}">
@@ -248,8 +250,8 @@
 							</c:if>
 						</c:forEach>
 
-						<img src="${likeImage}" class="like-img3"
-							data-member-id="${session.getAttribute('memberid')}"
+						<img src="${likeImage}" class="like-img"
+							data-member-id="${session.getAttribute('memberId')}"
 							data-post-id="${post.post_id}">
 
 						<p class="like-num">
@@ -269,7 +271,6 @@
         <p id="notExist">해당 검색어가 포함된 게시물이 존재하지 않습니다.</p>
     </c:if>
 </section></section>
-	 --%>
 	
 	<!-- part 4 -->
 		<section class="category">
@@ -285,7 +286,7 @@
 			<c:forEach var="post" items="${searchAllCategory.posts}">
 				<div class="post-box">
 					<div class="art-field">
-				<p class="art-field-name" data-post-id="${post.post_id}">
+				<p class="art-field-name" data-post-id="${post.post_id}" data-post-field-id="${post.post_field_id}">
 				<c:forEach var="arts" items="${searchAllCategory.arts}">
 				<c:if test="${arts.art_field_id eq post.art_field_id}">
 				${arts.art_field_name}
@@ -301,7 +302,7 @@
 						</c:if>
 					</c:forEach>
 					
-					<img src="/visionart/${post_att_path}" class="post-img4" data-post-id="${post.post_id}">
+					<img src="/visionart/${post_att_path}" class="post-img4" data-post-id="${post.post_id}" data-post-field-id="${post.post_field_id}">
 					
 					<h2 class="post-title4" data-post-id="${post.post_id}">${post.title}</h2>
 					
@@ -332,8 +333,8 @@
 							</c:if>
 						</c:forEach>
 
-						<img src="${likeImage}" class="like-img4"
-							data-member-id="${session.getAttribute('memberid')}"
+						<img src="${likeImage}" class="like-img"
+							data-member-id="${session.getAttribute('memberId')}"
 							data-post-id="${post.post_id}">
 
 						<p class="like-num">
@@ -368,7 +369,7 @@
 			<c:forEach var="post" items="${searchAllAuthor.posts}">
 				<div class="post-box">
 					<div class="art-field">
-				<p class="art-field-name" data-post-id="${post.post_id}">
+				<p class="art-field-name" data-post-id="${post.post_id}" data-post-field-id="${post.post_field_id}">
 				<c:forEach var="arts" items="${searchAllAuthor.arts}">
 				<c:if test="${arts.art_field_id eq post.art_field_id}">
 				${arts.art_field_name}
@@ -384,7 +385,7 @@
 						</c:if>
 					</c:forEach>
 					
-					<img src="/visionart/${post_att_path}" class="post-img4" data-post-id="${post.post_id}">
+					<img src="/visionart/${post_att_path}" class="post-img4" data-post-id="${post.post_id}" data-post-field-id="${post.post_field_id}">
 					
 					<h2 class="post-title4" data-post-id="${post.post_id}">${post.title}</h2>
 					
@@ -415,8 +416,8 @@
 							</c:if>
 						</c:forEach>
 
-						<img src="${likeImage}" class="like-img4"
-							data-member-id="${session.getAttribute('memberid')}"
+						<img src="${likeImage}" class="like-img"
+							data-member-id="${session.getAttribute('memberId')}"
 							data-post-id="${post.post_id}">
 
 						<p class="like-num">
@@ -466,7 +467,139 @@
             
    
     </div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // post_id를 클릭한 postBox에서 가져와서 새로운 URL로 이동
+    let sessionId = '<%= session.getAttribute("memberId") != null ? session.getAttribute("memberId") : "0" %>';
+    let postTitles = document.querySelectorAll('.post-title');
+    let postImages = document.querySelectorAll('.post-img');
+    let likeImages = document.querySelectorAll('.like-img');
+	let likeNums = document.querySelectorAll('.like-num');
+    
+    postTitles.forEach(function(postTitle) {
+        postTitle.addEventListener('click', function() {
+            let post_id = postTitle.dataset.postId; 
+            location.href = 'http://localhost:9071/post/' + post_id; //To Read Post One
+        });
+    });
+    
+    postImages.forEach(function(postImage) {
+        postImage.addEventListener('click', function() {
+            let post_id = postImage.dataset.postId; 
+            location.href = 'http://localhost:9071/post/' + post_id; //To Read Post One
+        });
+    });
+    
+    likeImages.forEach(function(likeImage) {
+        likeImage.addEventListener('click', function() {
+            let post_id = likeImage.dataset.postId;
+            let member_id = likeImage.dataset.memberId; 
+            
+            if (sessionId === "0") {
+                alert("로그인이 필요합니다.");
+            } else {
+                // 기존의 fetch 코드 유지
+                fetch('http://localhost:9071/post?post_id=' + post_id + '&member_id=' + member_id, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        // You can add more headers if needed
+                    },
+                })
+                .then(() => {
+                    location.reload();
+                });
+            }
+        });
+    });
+});
 
+
+document.addEventListener('DOMContentLoaded', function() {
+    // post_id를 클릭한 postBox에서 가져와서 새로운 URL로 이동
+    let postTitles = document.querySelectorAll('.post-title2');
+    let postImages = document.querySelectorAll('.post-img2');
+    let likeImages = document.querySelectorAll('.like-img');
+	let likeNums = document.querySelectorAll('.like-num');
+    
+    postTitles.forEach(function(postTitle) {
+        postTitle.addEventListener('click', function() {
+            let post_id = postTitle.dataset.postId; 
+            location.href = 'http://localhost:9071/ug/' + post_id; //To Read Post One
+        });
+    });
+    
+    postImages.forEach(function(postImage) {
+        postImage.addEventListener('click', function() {
+            let post_id = postImage.dataset.postId; 
+            location.href = 'http://localhost:9071/ug/' + post_id; //To Read Post One
+        });
+    });
+    
+   
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    // post_id를 클릭한 postBox에서 가져와서 새로운 URL로 이동
+    let postTitles = document.querySelectorAll('.post-title3');
+    let postImages = document.querySelectorAll('.post-img3');
+    let likeImages = document.querySelectorAll('.like-img');
+	let likeNums = document.querySelectorAll('.like-num');
+    
+    postTitles.forEach(function(postTitle) {
+        postTitle.addEventListener('click', function() {
+            let post_id = postTitle.dataset.postId; 
+            location.href = 'http://localhost:9071/fg/' + post_id; //To Read Post One
+        });
+    });
+    
+    postImages.forEach(function(postImage) {
+        postImage.addEventListener('click', function() {
+            let post_id = postImage.dataset.postId; 
+            location.href = 'http://localhost:9071/fg/' + post_id; //To Read Post One
+        });
+    });
+    
+   
+});
+document.addEventListener('DOMContentLoaded', function() {
+    // post_id를 클릭한 postBox에서 가져와서 새로운 URL로 이동
+    let postTitles = document.querySelectorAll('.post-title4');
+    let postImages = document.querySelectorAll('.post-img4');
+    let likeImages = document.querySelectorAll('.like-img');
+	let likeNums = document.querySelectorAll('.like-num');
+	
+    
+    postTitles.forEach(function(postTitle) {
+        postTitle.addEventListener('click', function() {
+             let post_id = postTitle.dataset.postId;
+            let post_field_id = postTitle.dataset.postFieldId;
+
+            if (post_field_id === "1") {
+                location.href = 'http://localhost:9071/ug/' + post_id;
+            } else if (post_field_id === "2") {
+                location.href = 'http://localhost:9071/fg/' + post_id;
+            }
+        });
+    });
+    
+    postImages.forEach(function(postImage) {
+        postImage.addEventListener('click', function() {
+             let post_id = postImage.dataset.postId;
+            let post_field_id = postImage.dataset.postFieldId;
+
+            if (post_field_id === "1") {
+                location.href = 'http://localhost:9071/ug/' + post_id;
+            } else if (post_field_id === "2") {
+                location.href = 'http://localhost:9071/fg/' + post_id;
+            }
+        });
+    });
+
+    
+  
+});
+</script>
 <%@ include file="footer.jsp" %>
 </body>
 </html>

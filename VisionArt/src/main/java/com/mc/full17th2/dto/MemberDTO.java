@@ -1,108 +1,26 @@
 package com.mc.full17th2.dto;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
+import org.springframework.stereotype.Component;
+
+import lombok.Data;
+
+@Data
+@Component
 public class MemberDTO {
-	private int member_id;
-	private int artist_id;
-	private int art_field_id;
-	
-	private String id;
-	private String password;
-	private String name;
-	private String phone_number;
-	private String email;
-	
-	private Boolean is_admin;
-
-	public MemberDTO() {
-		super();
-		
-	}
-
-	public MemberDTO(int member_id, int artist_id, int art_field_id, String id, String password, String name,
-			String phone_number, String email, Boolean is_admin) {
-		super();
-		this.member_id = member_id;
-		this.artist_id = artist_id;
-		this.art_field_id = art_field_id;
-		this.id = id;
-		this.password = password;
-		this.name = name;
-		this.phone_number = phone_number;
-		this.email = email;
-		this.is_admin = is_admin;
-	}
-
-	public int getMember_id() {
-		return member_id;
-	}
-
-	public void setMember_id(int member_id) {
-		this.member_id = member_id;
-	}
-
-	public int getArtist_id() {
-		return artist_id;
-	}
-
-	public void setArtist_id(int artist_id) {
-		this.artist_id = artist_id;
-	}
-
-	public int getArt_field_id() {
-		return art_field_id;
-	}
-
-	public void setArt_field_id(int art_field_id) {
-		this.art_field_id = art_field_id;
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getPhone_number() {
-		return phone_number;
-	}
-
-	public void setPhone_number(String phone_number) {
-		this.phone_number = phone_number;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public Boolean getIs_admin() {
-		return is_admin;
-	}
-
-	public void setIs_admin(Boolean is_admin) {
-		this.is_admin = is_admin;
-	}
-	
-	
+    int memberId;   // 사용자 고유번호
+    String id;   // 사용자 아이디
+    String email;   // 사용자 이메일
+    String password;   // 사용자 비밀번호
+    LocalDateTime signupDate;   // 가입일
+    LocalDate birthdate;   // 생일
+    String nickname;   // 닉네임
+    boolean isAdmin;   // 관리자 여부
+    int artistId;   // 좋아하는 예술가의 고유번호
+    String artistName;
+    int artFieldId;   // 좋아하는(관심있는) 미술 분야의 고유번호
+    String address;   // 주소 x
+    String phoneNumber;   // 전화번호 x
 }

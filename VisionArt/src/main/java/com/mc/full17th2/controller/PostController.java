@@ -38,9 +38,11 @@ public class PostController {
 		public String writeProcess(HttpSession session,
 				@RequestParam(name = "art_field_id") int artFieldId,
 				PostDTO2 postDTO, ImageDTO1 imageDTO) throws Exception {
-
-			int memberid = (int) session.getAttribute("memberid");
-			 postDTO.setMember_id(memberid);
+			String memberIdStr = (String) session.getAttribute("memberId");
+	    	 Integer memberId = (memberIdStr != null) ? Integer.parseInt(memberIdStr) : 0;
+			//Integer memberId = (Integer) session.getAttribute("memberId");
+			System.out.println(memberId);
+			 postDTO.setMember_id(memberId);
 		    // post_field_id 설정
 		    postDTO.setPost_field_id(0); // post_field_id를 0으로 설정
 		 // art_field_id 설정	 
@@ -110,7 +112,7 @@ public class PostController {
 
 		@PostMapping("/edit/{post_id}")
 		public String editPost(@PathVariable int post_id, 
-				@RequestParam(name = "art_field_id") int artFieldId,
+				@RequestParam(name = "art_field_id", defaultValue = "14") int artFieldId,
 		        PostDTO2 postDTO, ImageDTO1 imageDTO) throws Exception {
 			 // post_field_id 설정
 		    postDTO.setPost_field_id(0); // 여기서 post_field_id를 0으로 설정

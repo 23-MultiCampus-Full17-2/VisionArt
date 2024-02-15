@@ -39,8 +39,8 @@
 			        <option value="자랑하기" ${artFieldId == 11 ? 'selected' : ''}>자랑하기</option>
 			        <option value="질문하기" ${artFieldId == 12 ? 'selected' : ''}>질문하기</option>
 			        <option value="정보공유" ${artFieldId == 13 ? 'selected' : ''}>정보공유</option>
-			        <option value="그냥" ${artFieldId == 14 ? 'selected' : ''}>그냥</option>
-			         <option value="그냥" ${artFieldId == 15 ? 'selected' : 'selected'}>카테고리선택하기</option>
+			        <option value="그냥" ${artFieldId == 14 ? 'selected' : 'selected'}>그냥</option>
+			       
 			    </select>
 			</div>
 				 </div>
@@ -62,7 +62,57 @@
 			</form>
 		</div>
 	</section>
+<script>
+//CreatePost.js
 
+function setArtFieldId() {
+      var selectedArtField = document.getElementById("selectedArtField").value;
+      console.log("Selected Art Field: " + selectedArtField);
+      var artFieldIdInput = document.getElementById("artFieldId");
+      // artFieldId 요소가 존재하지 않으면, 기본값으로 설정
+      if (!artFieldIdInput) {
+          artFieldIdInput = document.createElement("input");
+          artFieldIdInput.type = "hidden";
+          artFieldIdInput.id = "artFieldId";
+          artFieldIdInput.name = "art_field_id";
+          artFieldIdInput.value = 14; // 기본값 설정
+          document.getElementById("postForm").appendChild(artFieldIdInput);
+      }
+
+      // artFieldIdInput의 value 값이 null이거나 undefined인 경우, 기본값으로 설정
+      if (artFieldIdInput.value === null || artFieldIdInput.value === undefined) {
+          artFieldIdInput.value = 14; // 기본값 설정
+      }
+
+      // 선택된 드롭다운 값에 따라 hidden 필드의 값을 설정함.
+      switch (selectedArtField) {
+          
+          case "유머글":
+              artFieldIdInput.value = 10;
+              break;
+          case "자랑하기":
+              artFieldIdInput.value = 11;
+              break;
+          case "질문하기":
+              artFieldIdInput.value = 12;
+              break;
+          case "정보공유":
+              artFieldIdInput.value = 13;
+              break;
+          case "그냥":
+              artFieldIdInput.value = 14;
+              break; 
+         
+          // 다른 옵션에 대한 경우 추가
+          default:
+              artFieldIdInput.value = 14; // 기본값 설정
+               break;
+      }
+      console.log("Art Field ID: " + artFieldIdInput.value);
+  }
+//페이지 로드 시 초기 값 확인을 위해 호출
+  setArtFieldId();
+</script>
 
 <%@ include file="footer.jsp" %>
 </body>

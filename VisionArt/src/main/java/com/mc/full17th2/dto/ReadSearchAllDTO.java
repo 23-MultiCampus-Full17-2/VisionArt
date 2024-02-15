@@ -4,7 +4,7 @@ import java.util.List;
 
 public class ReadSearchAllDTO {
 	 private List<PostDTO> posts;
-	 private List<MemberDTO> members;
+	 private List<MemberDTO2> members;
 	 private List<ArtFieldDTO> hitArts;
 	 
 	public ReadSearchAllDTO() {
@@ -12,7 +12,7 @@ public class ReadSearchAllDTO {
 		
 	}
 
-	public ReadSearchAllDTO(List<PostDTO> posts, List<MemberDTO> members, List<ArtFieldDTO> hitArts) {
+	public ReadSearchAllDTO(List<PostDTO> posts, List<MemberDTO2> members, List<ArtFieldDTO> hitArts) {
 		this.posts = posts;
 		this.members = members;
 		this.hitArts = hitArts;
@@ -26,11 +26,11 @@ public class ReadSearchAllDTO {
 		this.posts = posts;
 	}
 
-	public List<MemberDTO> getMembers() {
+	public List<MemberDTO2> getMembers() {
 		return members;
 	}
 
-	public void setMembers(List<MemberDTO> members) {
+	public void setMembers(List<MemberDTO2> members) {
 		this.members = members;
 	}
 

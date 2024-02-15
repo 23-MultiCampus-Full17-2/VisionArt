@@ -1,6 +1,8 @@
 package com.mc.full17th2.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
@@ -22,6 +25,9 @@ import com.mc.full17th2.dto.PostDTO;
 import com.mc.full17th2.dto.ReadPostOneDTO;
 import com.mc.full17th2.service.ReadPostOneService;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 public class ReadPostOneController {
 
@@ -30,7 +36,10 @@ public class ReadPostOneController {
 	
 	@GetMapping("/post/{post_id}")
 	@ResponseBody
-	public ModelAndView readPostOne(@PathVariable int post_id) {
+	public ModelAndView readPostOne(@PathVariable int post_id,HttpSession session) {
+		 String memberIdStr = (String) session.getAttribute("memberId");
+    	 Integer memberId = (memberIdStr != null) ? Integer.parseInt(memberIdStr) : 0;
+    	 
 		ReadPostOneDTO readPostOne = service.getReadPostOne(post_id);
   		List<ImageDTO> post_attachment = service.getImage(post_id);
   		int art_field_id = service.getArtFieldId(post_id); //
@@ -55,11 +64,7 @@ public class ReadPostOneController {
 	@PostMapping("/comment")
 	@ResponseBody
 	public CommentRq saveComment(@RequestBody CommentRq request) {
-		// 임의의 member_id 설정
-	    //int memberid = 1; // 예시로 임의의 숫자 1를 사용--나중에 삭제
-	    
-	    // request에서 member_id 값을 설정하거나 임의의 값으로 설정--나중에 삭제
-	   // request.setMember_id(memberid);
+		
 		  // 로그인 여부 확인
         if (request.getMember_id() == 0) {
             // 로그인이 안 된 경우
@@ -71,20 +76,13 @@ public class ReadPostOneController {
 		
 		return request;
 	}
-	
-	
-	@PostMapping("/comment/delete")
+	@PostMapping("/comment/delete/{comment_id}")
 	@ResponseBody
-	public boolean deleteComment(int comment_id) {
-		int res = service.deleteComment(comment_id);
-		
-		if(res > 0) {
-			return true;
-		} else {
-			return false;
-		}
+	public HashMap<String, Object> deleteComment(@PathVariable Integer comment_id, HttpServletRequest request) {
+	    return service.deleteCommentOne(comment_id, (String) request.getSession().getAttribute("memberId"));
 	}
-	
+
+
 	
 	@PostMapping("/post/like")
 	@ResponseBody

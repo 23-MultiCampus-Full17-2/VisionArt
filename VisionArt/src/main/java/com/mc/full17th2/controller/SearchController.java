@@ -32,11 +32,13 @@ public class SearchController {
     		@RequestParam String query, HttpSession session,
             @RequestParam(required = false) Integer post_id, 
             @RequestParam(required = false) Integer member_id)  {
-    	Integer memberIdObj = (Integer) session.getAttribute("memberid");
-        int memberid = (memberIdObj != null) ? memberIdObj : 0;
-
+    	//Integer memberIdObj = (Integer) session.getAttribute("memberId");
+        //int memberId = (memberIdObj != null) ? memberIdObj : 0;
+    	 String memberIdStr = (String) session.getAttribute("memberId");
+    	 Integer memberId = (memberIdStr != null) ? Integer.parseInt(memberIdStr) : 0;
+    	// Integer memberId = (memberIdStr != null && !memberIdStr.isEmpty()) ? Integer.parseInt(memberIdStr) : 0;
         // 좋아요 버튼 동작 부분
-        if (memberid != 0 && post_id != null && member_id != null) {
+        if (memberId != 0 && post_id != null && member_id != null) {
             boolean result = service.likeExists(member_id, post_id);
 
             if (result) {
@@ -45,7 +47,7 @@ public class SearchController {
                 service.updateLike(member_id, post_id);
             }
         }
-        List<LikeDTO> likes = service.getLikes(memberid);
+        List<LikeDTO> likes = service.getLikes(memberId);
         List<LikeDTO> likeTotal = service.likeTotal();
         List<ImageDTO> images = service.imageTotal();
         int pageSize = 20;

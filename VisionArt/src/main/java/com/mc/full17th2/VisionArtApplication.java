@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 //@ComponentScan(basePackages = {"config", "controller", "dao", "dto", "service"})
 
-/*@MapperScan(basePackages="dao")*/
+@MapperScan("com.mc.full17th2.dao")
 @SpringBootApplication
 public class VisionArtApplication {
 

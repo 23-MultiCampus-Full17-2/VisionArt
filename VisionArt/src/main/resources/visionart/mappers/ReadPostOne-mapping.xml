@@ -21,10 +21,13 @@
 	<insert id="insertComment" parameterType="commentdto">
 		insert into visionartdb.comments(comment_content, member_id, post_id) values(#{comment_content}, #{member_id}, #{post_id})
 	</insert>
-	
 	<delete id="deleteComment" parameterType="int">
-		delete from visionartdb.comments where comment_id = #{comment_id}
+		delete  from visionartdb.comments where comment_id = #{comment_id}
 	</delete>
+
+	<select id="getCommenterId" resultType="int" parameterType="int">
+    SELECT member_id FROM visionartdb.comments WHERE comment_id = #{comment_id}
+</select>
 	
 	<select id="selectLike" resultType="int" parameterType="likedto">
 		select count(*) from visionartdb.post_like where post_id = #{post_id} and member_id = #{member_id}
@@ -64,4 +67,12 @@
 	<select id="getOtherPostsByAuthor" resultType="postdto" parameterType="int">
     SELECT * FROM visionartdb.post WHERE member_id = #{member_id} AND post_id != #{post_id} LIMIT 5;
 </select>
+ <!-- 특정 댓글 삭제 -->
+    <delete id="deleteBoardComment">
+        <![CDATA[
+        DELETE FROM comments WHERE comment_id=#{comment_id} AND member_id=#{memberId};
+        ]]>
+    </delete>
+
+
 </mapper>

@@ -1,4 +1,4 @@
- var memberId = "${sessionScope.memberid}";
+ var memberId = "${sessionScope.memberId}";
 
 if (memberId && memberId !== "null" && memberId !== "0") {
     // 로그인된 사용자에 대한 작업 수행

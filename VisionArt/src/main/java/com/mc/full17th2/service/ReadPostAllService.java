@@ -10,10 +10,14 @@ import com.mc.full17th2.dto.ArtFieldDTO;
 import com.mc.full17th2.dto.ImageDTO;
 import com.mc.full17th2.dto.InformDTO;
 import com.mc.full17th2.dto.LikeDTO;
-import com.mc.full17th2.dto.MemberDTO;
+import com.mc.full17th2.dto.MemberDTO2;
 import com.mc.full17th2.dto.NoticeDTO;
 import com.mc.full17th2.dto.PostDTO;
 import com.mc.full17th2.dto.ReadPostAllDTO;
+import com.mc.full17th2.dto.UgArtFieldDTO;
+import com.mc.full17th2.dto.UgMemberDTO;
+import com.mc.full17th2.dto.UgPostDTO;
+import com.mc.full17th2.dto.UgReadPostAllDTO;
 
 @Service
 public class ReadPostAllService {
@@ -24,18 +28,28 @@ public class ReadPostAllService {
 	public ReadPostAllDTO getReadPostAll(int page, int pageSize){
 		int offset = page * pageSize;
 		List<PostDTO> posts = dao.selectPosts(offset, pageSize);
-		List<MemberDTO> members = dao.selectMembers();
+		List<MemberDTO2> members = dao.selectMembers();
 		List<ArtFieldDTO> arts = dao.getArtFieldName();
 		
 		return new ReadPostAllDTO(posts, members, arts);
 	}
-	
+	public UgReadPostAllDTO selectUgReadPostAllByPostField(int page, int pageSize){
+		int offset = page * pageSize;
+		List<UgPostDTO> posts = dao.selectUgPostsByPostField(offset, pageSize);
+		List<UgMemberDTO> members = dao.selectUgMembers();
+		//List<UgMemberDTO> members = dao.selectUgMembersButMe(member_id);
+		List<UgArtFieldDTO> arts = dao.getUgArtFieldName();
+		return new UgReadPostAllDTO(posts, members, arts);
+	}
+	public int getUgTotalPosts() {
+		return dao.getUgTotalPosts();
+	}
 	public int getTotalPosts() {
 		return dao.getTotalPosts();
 	}
 	
-	public List<LikeDTO> getLikes(int memberid){
-		return dao.getLikes(memberid);
+	public List<LikeDTO> getLikes(int memberId){
+		return dao.getLikes(memberId);
 	}
 	
 	public void updateLike(int memberid, int post_id) {
@@ -59,49 +73,10 @@ public class ReadPostAllService {
 		return dao.imageTotal();
 	}
 	
-	/* My Page      */
-	public List<PostDTO> getMyPost(int memberid, int postNumber){
-		return dao.getMyPost(memberid, postNumber);
-	}
-	
-	public List<PostDTO> getMyAllPost(int member_id){
-		return dao.getMyAllPost(member_id);
-	}
-	
-	public List<MemberDTO> memberTotal(){
-		return dao.selectMembers();
-	}
-	
-	public int validatePw(int memberid, String password) {
-		return dao.validatePw(memberid, password);
-	}
-	
-	public void deleteMember(int member_id) {
-		dao.deleteMember(member_id);
-	}
-	/* My Page      */
-	
-	public List<InformDTO> getNoticeAll() {
-		return dao.selectAllNotice();
-	}
-	
-	public NoticeDTO getAllNoitce() {
-		List<InformDTO> informs = dao.selectAllNotice();
-		List<MemberDTO> members = dao.selectMembers();
-		return new NoticeDTO(members, informs);
-	}
-	
-	public void updateNotice(String title, String textbox) {
-		dao.updateNotice(title, textbox);
-	}
-	
-	public void deleteNotice(int informid) {
-		dao.deleteNotice(informid);
-	}
-	
-	/* 추가된 내용(notice) */
-	public boolean checkAuthority(int member_id) {
-		return dao.selectAuthority(member_id);
+
+
+	public List<ArtFieldDTO>  getArtFieldName(){
+		return dao.getArtFieldName();
 	}
 
 

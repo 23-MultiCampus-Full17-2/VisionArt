@@ -24,14 +24,15 @@ public class UgReadPostAllController {
 	@GetMapping("/ug")
 	public String ugReadPostAll(Model model, @RequestParam(defaultValue = "0") int page, HttpSession session,
 			@RequestParam(required = false) Integer post_id, @RequestParam(required = false) Integer member_id){
-
-		Integer memberIdObj = (Integer) session.getAttribute("memberid");
+		 String memberIdStr = (String) session.getAttribute("memberId");
+    	 Integer memberId = (memberIdStr != null) ? Integer.parseInt(memberIdStr) : 0;
+		//Integer memberIdObj = (Integer) session.getAttribute("memberId");
 		// memberid가 null이면 0으로 기본값을 설정
-		int memberid = (memberIdObj != null) ? memberIdObj : 0; 
+		//int memberid = (memberIdObj != null) ? memberIdObj : 0; 
 
 		//memberid가 0이 아닌 경우(사용자가 로그인 중인 경우)
 		 // 좋아요 버튼 동작 여부
-       boolean likeButtonEnabled = (memberid != 0 && post_id != null && member_id != null);
+       boolean likeButtonEnabled = (memberId != 0 && post_id != null && member_id != null);
 
        // 좋아요 동작이 가능한 경우
        if (likeButtonEnabled) {
@@ -44,7 +45,7 @@ public class UgReadPostAllController {
            }
        }
 
-			List<UgLikeDTO> likes = service.getLikes(memberid);
+			List<UgLikeDTO> likes = service.getLikes(memberId);
 			List<UgLikeDTO> likeTotal = service.likeTotal();
 			List<UgImageDTO> images = service.imageTotal();
 			int pageSize = 8; //페이지 당 표시되는 게시물 수

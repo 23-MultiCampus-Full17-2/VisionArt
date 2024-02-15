@@ -99,11 +99,11 @@
 </select>
  
  
- 	 <select id="selectMembers" resultType="memberdto">
+ 	 <select id="selectMembers" resultType="memberdto2">
  		SELECT * FROM visionartdb.member; 
  	</select> 
  	
- 	 <select id="selectMembersWithQuery" resultType="memberdto">
+ 	 <select id="selectMembersWithQuery" resultType="memberdto2">
  		SELECT * FROM visionartdb.member
  		WHERE
     <if test="query != null and query != ''">
@@ -135,19 +135,19 @@
 	 
 <!--likes -->	
 	<select id="selectLikes" resultType="likedto" parameterType="map">
-		SELECT * FROM visionartdb.post_like where member_id = #{memberid};
+		SELECT * FROM visionartdb.post_like where member_id = #{memberId};
 	</select>
 	
 	<insert id="updateLike" parameterType="map">
-    INSERT INTO visionartdb.post_like (member_id, post_id) VALUES (#{memberid}, #{postid});
+    INSERT INTO visionartdb.post_like (member_id, post_id) VALUES (#{memberId}, #{post_id});
 	</insert> 
 	
 	 <select id="likeExists" resultType="int" parameterType="map">
-		SELECT count(*) FROM visionartdb.post_like where member_id = #{memberid} AND post_id = #{post_id};
+		SELECT count(*) FROM visionartdb.post_like where member_id = #{memberId} AND post_id = #{post_id};
 	</select> 
 	
  	<delete id="deleteLike" parameterType="map">
-    	DELETE FROM visionartdb.post_like WHERE member_id = #{memberid} AND post_id = #{post_id}
+    	DELETE FROM visionartdb.post_like WHERE member_id = #{memberId} AND post_id = #{post_id}
 	</delete>
 	
 	<select id="likeTotal" resultType="likedto">
